@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, TextInput, Image, Alert } from 'react-native';
 
-import app_auth from '../api/auth';
-import { saveUserToken } from '../global/storage';
-import { IMAGES } from '../constants/image';
-import { navigate } from '../navigation/RootNavigation';
-import { styles, styleForm } from '../style';
-import Loading from '../component/Loading/';
+import { useAuthContext } from '../../contexts/auth';
 
-function Login() {
+//import { saveUserToken } from '../../global/storage';
+import { IMAGES } from '../../constants/image';
+//import { navigate } from '../../navigation/RootNavigation';
+import { styles, styleForm } from '../../style';
+
+function SignIn() {
     const [username, setUsername] = React.useState(null);
     const [password, setPassword] = React.useState(null);
-    const [showLoading, setShowLoading] = React.useState(false);
+    const {signIn} = useAuthContext();
 
     const _handleUserNameText = text => {
         setUsername(text);
@@ -31,19 +31,17 @@ function Login() {
     };
     
     const _handleLogin = async () => {
-        setShowLoading(true);
         if (!validForm()) {
-            setShowLoading(false);
             Alert.alert('Complete los datos solicitados!');
             return;
         }
 
-        let response = await app_auth(username, password);
+        //let response = await app_auth(username, password);
+        let response = await signIn(username, password);
         if (response != null && response.success) {
-            saveUserToken(response);
+            //saveUserToken(response);
             resetForm();
-            setShowLoading(false);
-            navigate('HomeApp');
+            //navigate('HomeApp');
         } else if (response == null || (response.error != undefined && response.error != null)) {
             Alert.alert('Se produjo un error realizando la autentificación.');
         } else {
@@ -53,7 +51,6 @@ function Login() {
 
     return (
         <View style={styles.content}>
-            <Loading animating={showLoading} />
             <View style={styles.logoContainer}>
                 <Image source={IMAGES.LOGO} style={styles.logo} resizeMode='contain' />
             </View>
@@ -82,4 +79,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default SignIn;

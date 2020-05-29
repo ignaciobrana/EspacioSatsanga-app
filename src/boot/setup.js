@@ -1,12 +1,7 @@
 import React from "react";
-import Routes from '../routes';
+//import Routes from '../routes';
+import App from '../App';
 
-class Setup extends React.Component {
-    render() {
-        return (
-            <Routes />
-        );
-    }
-}
+const Setup = () => <App />;
 
 export default Setup;

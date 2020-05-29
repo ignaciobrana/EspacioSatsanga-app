@@ -3,20 +3,8 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 
 function Loading(props) {
     return (
-        <View
-            style={
-                [styles.container,
-                styles.horizontal,
-                props.animating ? 
-                    {backgroundColor: '#E1E1E1'} 
-                : 
-                    {backgroundColor: '#FFF'}]
-            }
-        >
-            <ActivityIndicator
-                size="large"
-                animating={props.animating}
-            />
+        <View style={styles.container}>
+            <ActivityIndicator size="large"/>
         </View>
     );
 }
@@ -27,8 +15,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        position: 'absolute',
-        //backgroundColor: '#EFEFEF'
+        alignItems: 'center',
+        //position: 'absolute',
+        backgroundColor: '#EFEFEF'
         //backgroundColor: '#FFF'
     },
 

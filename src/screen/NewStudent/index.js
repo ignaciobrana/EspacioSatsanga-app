@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Text, Alert, StyleSheet, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import moment from 'moment';
 
-import set_student from '../../api/student';
-import { get_HowYouKnowUs, get_Gender } from '../../api/generalData';
+import set_student from '../../services/student';
+import { get_HowYouKnowUs, get_Gender } from '../../services/generalData';
 import Header from '../../component/Header';
 import PickerList from '../../component/PikerList';
 import DatePicker from '../../component/DatePicker';
@@ -113,12 +113,14 @@ function NewStudentScreen() {
         return reg.test(text);
     }
 
+    if (showLoading)
+        return <Loading />;
+
     return (
         <>
             <Header />
             <ScrollView style={{ backgroundColor: '#fff' }}>
                 <SafeAreaView style={style.content}>
-                    <Loading animating={showLoading} />
                     <Text style={styleForm.title}>
                         Cargar Alumno Nuevo
                     </Text>

@@ -1,4 +1,4 @@
 export const STORAGE = {
-    USER_TOKEN: 'user_token',
-    EXPO_TOKEN: 'expoToken',
+    USER_TOKEN: '@RNAuth:User',
+    EXPO_TOKEN: '@RNExpo:token',
 }
